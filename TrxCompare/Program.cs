@@ -29,13 +29,13 @@ namespace TrxCompare
          Console.WriteLine(@$"""Comparing:"",""{trxLeft}"",""{trxRight}""");
 
          Console.WriteLine("Tests removed:");
-         foreach (TestRunResult test in inLeftButNotRight)
+         foreach (var (_, test) in  inLeftButNotRight)
          {
             Console.WriteLine($"\"{test.FullName}\", \"{test.Outcome}\"");
          }
             
          Console.WriteLine("Tests added:");
-         foreach (TestRunResult test in inRightButNotLeft)
+         foreach (var (_, test) in inRightButNotLeft)
          {
             Console.WriteLine($"\"{test.FullName}\", \"{test.Outcome}\"");
          }
@@ -61,7 +61,7 @@ namespace TrxCompare
       {
          var serializer = new XmlSerializer(typeof(TestRun));
          using var reader = new StreamReader(trxFilePath);
-         return (TestRun)serializer.Deserialize(reader) ?? throw new SerializationException();
+         return (TestRun)(serializer.Deserialize(reader) ?? throw new SerializationException());
       }
    }
 }

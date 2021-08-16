@@ -67,6 +67,8 @@ namespace TrxCompare
 
       public ICollection<TestRunResult> Values => _testRunResults.Values;
 
-      public IEnumerator GetEnumerator() => _testRunResults.GetEnumerator();
+      IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+      public IEnumerator<KeyValuePair<Guid, TestRunResult>> GetEnumerator() => _testRunResults.GetEnumerator();
    }
 }
